@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Theme Redirection</title>
+</head>
+<body onload="themeswitch()">
+	<header>
+		<h1>Attempting theme redirection</h1>
+	</header>
+
+	<h2>Please wait ...</h2>
+
+    <script>
+        // Get the totheme from the query parameter
+        let totheme = new URLSearchParams(window.location.search).get('totheme'); // this gives result as e.g. -- 'theme-black.html' -- we just need 'theme-black'
+        totheme = totheme.replace('.html','');
+        console.log('totheme:', totheme);
+    </script>
+
+    <script>
+
+        window.themeswitch = function() {
+
+            console.log('Option 1 selected');
+            // Add your custom logic for Option 1
+
+            console.log('Current URL:', window.location.href);
+            console.log('Calling URL:', document.referrer);
+
+            let originalURL = document.referrer;    //  window.location.href;
+            let updatedURL = originalURL;           //  window.location.href;
+
+            if (originalURL.includes('theme-black')) {
+                let fromtheme = 'theme-black';
+                updatedURL = originalURL.replace(fromtheme, totheme);
+                console.log('Updated URL:', updatedURL);
+                // window.location.href = updatedURL;
+                } 
+            else if (originalURL.includes('theme-dark-bg')) {
+                let fromtheme = 'theme-dark-bg';
+                updatedURL = originalURL.replace(fromtheme, totheme);
+                console.log('Updated URL:', updatedURL);
+                // window.location.href = updatedURL;
+                } 
+                
+            else {
+                let fromtheme = 'no-theme';
+                updatedURL = 'https://portal.oracleerpguide.com/docs/theme-dark-bg/fin/gl110/index.html' ;
+                console.log('Updated URL:', updatedURL);
+                // window.location.href = updatedURL;
+                // console.log('No theme found. Setting to "none.html"');
+                }    
+
+            window.location.href = updatedURL;  // this takes to the updatedURL
+            
+        };
+
+    </script>
+
+</body>
